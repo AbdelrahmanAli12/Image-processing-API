@@ -1,6 +1,5 @@
 import supertest from 'supertest';
 import app from '../main';
-import api from '../routes/api/index';
 
 const request = supertest(app);
 
