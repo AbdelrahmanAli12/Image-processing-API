@@ -18,13 +18,13 @@ To start the server use
   npm run start
 ```
 
-To run prettier and lint
+To run prettier
 
 ```bash
   npm run prettier 
 ```
 
-To run lint use
+To run lint
 ```bash
 npm run lint
 ```
