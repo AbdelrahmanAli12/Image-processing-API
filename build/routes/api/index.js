@@ -13,13 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const sharp_1 = __importDefault(require("sharp"));
+const fs_1 = __importDefault(require("fs"));
+const sharp_1 = __importDefault(require("../utility/sharp"));
 const api = express_1.default.Router();
 api.get('/test', (req, res) => {
     res.json('The api route is connected');
 });
 api.get('/images', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const filename = req.query.filename;
+    const filename = String(req.query.filename);
     const width = Number(req.query.width);
     const height = Number(req.query.height);
     if (filename == null || width == null || height == null) {
@@ -33,18 +34,21 @@ api.get('/images', (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     else if (isNaN(width) || isNaN(height)) {
         res.status(400).json({ message: 'width and height must be a number' });
     }
+    else if (fs_1.default.existsSync(`./assets/thumb/${filename}-${width}-${height}_thumb.jpg`)) {
+        res.sendFile(`thumb/${filename}-${width}-${height}_thumb.jpg`, {
+            root: './assets',
+        });
+    }
     else {
         try {
-            yield (0, sharp_1.default)(`assets/full/${filename}.jpg`)
-                .resize(width, height, {
-                fit: 'contain',
-            })
-                .toFile(`assets/thumb/${filename}_thumb.jpg`);
+            yield (0, sharp_1.default)(filename, width, height);
         }
         catch (error) {
             res.status(404).json('Photo not found');
         }
-        res.sendFile(`thumb/${filename}_thumb.jpg`, { root: './assets' });
+        res.sendFile(`thumb/${filename}-${width}-${height}_thumb.jpg`, {
+            root: './assets',
+        });
     }
 }));
 exports.default = api;

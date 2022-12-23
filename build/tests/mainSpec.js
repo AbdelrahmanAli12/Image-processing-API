@@ -16,7 +16,7 @@ const supertest_1 = __importDefault(require("supertest"));
 const main_1 = __importDefault(require("../main"));
 const request = (0, supertest_1.default)(main_1.default);
 describe('Test endpoint responses', () => {
-    it('gets the api endpoint', () => __awaiter(void 0, void 0, void 0, function* () {
+    it('gets the api endpoint and status code to be 200', () => __awaiter(void 0, void 0, void 0, function* () {
         const response = yield request.get('/api/images?filename=lion&width=500&height=500');
         expect(response.status).toBe(200);
     }));

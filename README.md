@@ -6,7 +6,7 @@ library by getting the filename from the assets file and the width
 and height for the output Image
 ## Running Tests
 
-To run tests, run the following command
+To run tests, run the following command that will run two tests,one to check the server is connecting and the other one to check that the endpoint is giving status code 200
 
 ```bash
   npm run test
