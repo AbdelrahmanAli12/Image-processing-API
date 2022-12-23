@@ -1,14 +1,14 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import fs from 'fs';
 import image from '../utility/sharp';
 
 const api = express.Router();
 
-api.get('/test', (req, res) => {
+api.get('/test', (_req: Request, res: Response): void => {
   res.json('The api route is connected');
 });
 
-api.get('/images', async (req, res): Promise<void> => {
+api.get('/images', async (req: Request, res: Response): Promise<void> => {
   const filename = String(req.query.filename);
   const width = Number(req.query.width);
   const height = Number(req.query.height);

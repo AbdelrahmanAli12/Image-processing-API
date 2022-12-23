@@ -1,13 +1,13 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import api from './routes/api';
 const app = express();
-const port = 3030;
+const port: Number = 3030;
 
-app.listen(port, () => {
+app.listen(port, (): void => {
   console.log(`server listening on ${port}`);
 });
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response): void => {
   res.json('The server is connected');
 });
 

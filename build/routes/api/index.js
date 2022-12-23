@@ -16,7 +16,7 @@ const express_1 = __importDefault(require("express"));
 const fs_1 = __importDefault(require("fs"));
 const sharp_1 = __importDefault(require("../utility/sharp"));
 const api = express_1.default.Router();
-api.get('/test', (req, res) => {
+api.get('/test', (_req, res) => {
     res.json('The api route is connected');
 });
 api.get('/images', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
